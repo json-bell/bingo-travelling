@@ -5,7 +5,7 @@ const TestPage = ({}) => {
   return (
     <>
       <TripButton />
-      <a href="/">Back to home</a>
+      <Link href="/">Back to home</Link>
     </>
   );
 };
