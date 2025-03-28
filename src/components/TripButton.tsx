@@ -20,17 +20,19 @@ const TripButton = () => {
     setSuccessMessage("");
 
     try {
-      const response = await axios.post("/api/trips", { destination });
+      await axios.post("/api/trips", { destination });
 
       // If the request is successful, handle the response
       setSuccessMessage("Destination added successfully!");
       setDestination("");
-    } catch (error: any) {
+    } catch (error) {
       // If there's an error, handle it
-      setError(
-        error?.response?.data?.error ||
-          "An error occurred while creating the trip."
-      );
+      if (axios.isAxiosError(error))
+        setError(
+          error?.response?.data?.error ||
+            "An error occurred while creating the trip."
+        );
+      else throw error;
     } finally {
       setIsLoading(false);
     }
